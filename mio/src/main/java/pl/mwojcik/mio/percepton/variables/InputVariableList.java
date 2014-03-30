@@ -14,6 +14,11 @@ public class InputVariableList<T extends InputVariable> {
 		this.length = length;
 		variables = (List<T>) new ArrayList<>(Collections.nCopies(length, null));
 	}
+	
+	public InputVariableList(List<T> variables) {
+		this.variables = new ArrayList<>(variables);
+		this.length = variables.size();
+	}
 
 	public int getLength() {
 		return length;
@@ -30,6 +35,11 @@ public class InputVariableList<T extends InputVariable> {
 		variables.set(i, variable);
 		
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "InputVariableList [variables=" + variables + "]";
 	}
 	
 }

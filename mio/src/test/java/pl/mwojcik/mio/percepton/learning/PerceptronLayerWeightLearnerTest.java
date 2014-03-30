@@ -49,10 +49,13 @@ public class PerceptronLayerWeightLearnerTest {
 
 		learner = new PerceptronLayerWeightLearner<>(new ArrayList<Animal>(Arrays.asList(Animal.values())),
 				new LineFunction(1, 0), 3, 2);
+		
+		learner = new PerceptronLayerWeightLearner<>(new ArrayList<Animal>(Arrays.asList(Animal.values())),
+				new SigmoidalFunction(), 3, 0.55);
 
 		learner.addData(cat, Animal.CAT);
 		learner.addData(dog, Animal.DOG);
-		 learner.addData(monkey, Animal.MONKEY);
+//		 learner.addData(monkey, Animal.MONKEY);
 
 	}
 
@@ -60,8 +63,8 @@ public class PerceptronLayerWeightLearnerTest {
 	public void testClassify() {
 		learner.learn();
 
-		for (WeightedSumPerceptron<InputVariable> perceptron : learner.getPerceptronLayer().getPerceptrons().keySet()) {
-			System.out.println("Dobre wagi dla " + learner.getPerceptronLayer().getPerceptrons().get(perceptron) + ": "
+		for (WeightedSumPerceptron<InputVariable> perceptron : learner.getPerceptronLayer().getPerceptronsMap().keySet()) {
+			System.out.println("Dobre wagi dla " + learner.getPerceptronLayer().getPerceptronsMap().get(perceptron) + ": "
 					+ perceptron.getWeights());
 		}
 	}

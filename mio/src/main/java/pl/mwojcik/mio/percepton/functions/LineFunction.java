@@ -15,4 +15,14 @@ public class LineFunction implements Function {
 		return a * input + b;
 	}
 
+	@Override
+	public double getDefaultActivationThreshold() {
+		return 2;
+	}
+
+	@Override
+	public double runDerivative(double input) {
+		return a;
+	}
+
 }

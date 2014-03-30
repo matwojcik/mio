@@ -26,11 +26,15 @@ public abstract class Perceptron<T extends InputVariable> {
 
 	public boolean isActive(InputVariableList<T> variables) {
 		if(variablesCount != variables.getLength())
-			throw new IllegalArgumentException("Given " + variables.getLength() + "variables, expected " + variablesCount);
+			throw new IllegalArgumentException("Given " + variables.getLength() + " variables, expected " + variablesCount);
 		
 		return getResult(variables) >= activationThreshold;
 	}
 	
 	public abstract double getResult(InputVariableList<?> variables);
+
+	public int getVariablesCount() {
+		return variablesCount;
+	}
 	
 }

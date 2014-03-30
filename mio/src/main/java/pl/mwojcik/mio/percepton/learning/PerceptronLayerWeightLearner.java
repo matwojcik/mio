@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import pl.mwojcik.mio.classes.PerceptronClass;
-import pl.mwojcik.mio.percepton.PerceptronLayer;
-import pl.mwojcik.mio.percepton.PerceptronLayer.Builder;
+import pl.mwojcik.mio.percepton.PerceptronOutsideLayer;
+import pl.mwojcik.mio.percepton.PerceptronOutsideLayer.Builder;
 import pl.mwojcik.mio.percepton.WeightedSumPerceptron;
 import pl.mwojcik.mio.percepton.functions.Function;
 import pl.mwojcik.mio.percepton.variables.InputVariable;
@@ -14,7 +14,7 @@ import pl.mwojcik.mio.percepton.variables.InputVariableList;
 
 public class PerceptronLayerWeightLearner<V extends InputVariable, C extends PerceptronClass> {
 
-	private PerceptronLayer<V, WeightedSumPerceptron<V>, C> perceptronLayer;
+	private PerceptronOutsideLayer<V, WeightedSumPerceptron<V>, C> perceptronLayer;
 
 	private Map<InputVariableList<V>, C> data = new HashMap<>();
 
@@ -22,7 +22,7 @@ public class PerceptronLayerWeightLearner<V extends InputVariable, C extends Per
 			double activationThreshold) {
 		super();
 
-		Builder<V, WeightedSumPerceptron<V>, C> builder = PerceptronLayer.<V, WeightedSumPerceptron<V>, C> builder();
+		Builder<V, WeightedSumPerceptron<V>, C> builder = PerceptronOutsideLayer.<V, WeightedSumPerceptron<V>, C> builder();
 
 		for (C perceptronClass : classes) {
 			builder.addPerceptron(new WeightedSumPerceptron<V>(function, variablesCount, activationThreshold),
@@ -38,7 +38,7 @@ public class PerceptronLayerWeightLearner<V extends InputVariable, C extends Per
 	}
 
 	public void learn() {
-		for(WeightedSumPerceptron<V> perceptron: perceptronLayer.getPerceptrons().keySet()) {
+		for(WeightedSumPerceptron<V> perceptron: perceptronLayer.getPerceptronsMap().keySet()) {
 			learnPerceptron(perceptron);
 		}
 	}
@@ -56,12 +56,12 @@ public class PerceptronLayerWeightLearner<V extends InputVariable, C extends Per
 
 	private void learnPerceptron(WeightedSumPerceptron<V> perceptron) {
 		WeightLearner<V> weightLearner = new WeightLearner<>(perceptron, getInputDataForClass(perceptronLayer
-				.getPerceptrons().get(perceptron)));
+				.getPerceptronsMap().get(perceptron)));
 		
 		weightLearner.learn();
 	}
 
-	public PerceptronLayer<V, WeightedSumPerceptron<V>, C> getPerceptronLayer() {
+	public PerceptronOutsideLayer<V, WeightedSumPerceptron<V>, C> getPerceptronLayer() {
 		return perceptronLayer;
 	}
 }

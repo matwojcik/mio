@@ -23,4 +23,9 @@ public class InputVariableImpl implements InputVariable {
 		return value;
 	}
 
+	@Override
+	public String toString() {
+		return "InputVariableImpl [value=" + value + "]";
+	}
+
 }
