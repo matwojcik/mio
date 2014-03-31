@@ -1,9 +1,8 @@
 package pl.mwojcik.mio.percepton.learning;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -129,99 +128,4 @@ public class WeightLearnerTest {
 		System.out.println("Dobre wagi: " + perceptron.getWeights());
 	}
 	
-//	@Test
-	public void test() {
-		InputVariableList<InputVariable> car = new InputVariableList<>(10);
-		
-		car.setVariable(0, InputVariableImpl.factory(1200)); // waga
-		car.setVariable(1, InputVariableImpl.factory(4)); // długość
-		car.setVariable(2, InputVariableImpl.factory(1.6)); // szerokość
-		car.setVariable(3, InputVariableImpl.factory(4)); // ilość kół
-		car.setVariable(4, InputVariableImpl.factory(0)); // ilosc skrzydeł
-		car.setVariable(5, InputVariableImpl.factory(5)); // ilosc miejsc
-		car.setVariable(6, InputVariableImpl.factory(1));  // ilosc kierowcow/pilotow
-		car.setVariable(7, InputVariableImpl.factory(1)); // moc silnika
-		car.setVariable(8, InputVariableImpl.factory(180)); // predkosc max
-		car.setVariable(9, InputVariableImpl.factory(4));// ilosc drzwi
-	
-
-
-		InputVariableList<InputVariable> dron = new InputVariableList<>(10);
-		
-		dron.setVariable(0, InputVariableImpl.factory(1)); // waga
-		dron.setVariable(1, InputVariableImpl.factory(2)); // długość
-		dron.setVariable(2, InputVariableImpl.factory(3)); // szerokość
-		dron.setVariable(3, InputVariableImpl.factory(4)); // ilość kół
-		dron.setVariable(4, InputVariableImpl.factory(2)); // ilosc skrzydeł
-		dron.setVariable(5, InputVariableImpl.factory(0)); // ilosc miejsc
-		dron.setVariable(6, InputVariableImpl.factory(0));  // ilosc kierowcow/pilotow
-		dron.setVariable(7, InputVariableImpl.factory(10)); // moc silnika
-		dron.setVariable(8, InputVariableImpl.factory(100)); // predkosc max
-		dron.setVariable(9, InputVariableImpl.factory(0));// ilosc drzwi
-		
-		InputVariableList<InputVariable> helicopter = new InputVariableList<>(10);
-		
-		helicopter.setVariable(0, InputVariableImpl.factory(8)); // waga
-		helicopter.setVariable(1, InputVariableImpl.factory(8)); // długość
-		helicopter.setVariable(2, InputVariableImpl.factory(3)); // szerokość
-		helicopter.setVariable(3, InputVariableImpl.factory(6)); // ilość kół
-		helicopter.setVariable(4, InputVariableImpl.factory(2)); // ilosc skrzydeł
-		helicopter.setVariable(5, InputVariableImpl.factory(6)); // ilosc miejsc
-		helicopter.setVariable(6, InputVariableImpl.factory(1));  // ilosc kierowcow/pilotow
-		helicopter.setVariable(7, InputVariableImpl.factory(10)); // moc silnika
-		helicopter.setVariable(8, InputVariableImpl.factory(250)); // predkosc max
-		helicopter.setVariable(9, InputVariableImpl.factory(2));// ilosc drzwi
-		
-		InputVariableList<InputVariable> warPlane = new InputVariableList<>(10);
-		
-		warPlane.setVariable(0, InputVariableImpl.factory(500_000)); // waga
-		warPlane.setVariable(1, InputVariableImpl.factory(40)); // długość
-		warPlane.setVariable(2, InputVariableImpl.factory(20)); // szerokość
-		warPlane.setVariable(3, InputVariableImpl.factory(6)); // ilość kół
-		warPlane.setVariable(4, InputVariableImpl.factory(2)); // ilosc skrzydeł
-		warPlane.setVariable(5, InputVariableImpl.factory(50)); // ilosc miejsc
-		warPlane.setVariable(6, InputVariableImpl.factory(2));  // ilosc kierowcow/pilotow
-		warPlane.setVariable(7, InputVariableImpl.factory(100_0)); // moc silnika
-		warPlane.setVariable(8, InputVariableImpl.factory(1000)); // predkosc max
-		warPlane.setVariable(9, InputVariableImpl.factory(1));// ilosc drzwi
-
-
-		InputVariableList<InputVariable> plane = new InputVariableList<>(10);
-		
-		plane.setVariable(0, InputVariableImpl.factory(200_000)); // waga
-		plane.setVariable(1, InputVariableImpl.factory(40)); // długość
-		plane.setVariable(2, InputVariableImpl.factory(20)); // szerokość
-		plane.setVariable(3, InputVariableImpl.factory(6)); // ilość kół
-		plane.setVariable(4, InputVariableImpl.factory(2)); // ilosc skrzydeł
-		plane.setVariable(5, InputVariableImpl.factory(300)); // ilosc miejsc
-		plane.setVariable(6, InputVariableImpl.factory(2));  // ilosc kierowcow/pilotow
-		plane.setVariable(7, InputVariableImpl.factory(100_0)); // moc silnika
-		plane.setVariable(8, InputVariableImpl.factory(1300)); // predkosc max
-		plane.setVariable(9, InputVariableImpl.factory(2));// ilosc drzwi
-		
-		Function function = new SigmoidalFunction();
-		WeightedSumPerceptron<InputVariable> perceptron = new WeightedSumPerceptron<>(
-				function, 10, new ArrayList<>(Collections.nCopies(11, 1.)), 0.7);
-
-		
-		Map<InputVariableList<InputVariable>, Boolean> inputData= new HashMap<>();
-		
-		inputData.put(car, false);
-		inputData.put(plane, true);
-		inputData.put(warPlane, false);
-		inputData.put(dron, false);
-		inputData.put(helicopter, false);
-		
-		
-		WeightLearner<InputVariable> learner = new WeightLearner<>(perceptron, inputData);
-		
-		learner.learn();
-		
-		assertTrue("Plane should activate", perceptron.isActive(plane));
-		assertFalse("Car shouldn't activate", perceptron.isActive(car));
-		assertFalse("Helicopter shouldn't activate", perceptron.isActive(helicopter));
-		assertFalse("Dron shouldn't activate", perceptron.isActive(dron));
-		assertFalse("War plane shouldn't activate", perceptron.isActive(plane));
-	}
-
 }

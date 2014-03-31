@@ -1,6 +1,7 @@
 package pl.mwojcik.mio.percepton;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import pl.mwojcik.mio.percepton.WeightedSumPerceptron;
 import pl.mwojcik.mio.percepton.functions.Function;
 import pl.mwojcik.mio.percepton.functions.SigmoidalFunction;
 import pl.mwojcik.mio.percepton.variables.InputVariable;

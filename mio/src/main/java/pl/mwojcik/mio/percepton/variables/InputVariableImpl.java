@@ -13,6 +13,16 @@ public class InputVariableImpl implements InputVariable {
 		return new InputVariableImpl(value);
 	}
 
+	public static InputVariableList<InputVariable> asList(double... variables) {
+		 InputVariableList<InputVariable> result =  new InputVariableList<>(variables.length);
+		 
+		 for(int i = 0; i < variables.length; ++i) {
+			 result.setVariable(i, new InputVariableImpl(variables[i]));
+		 }
+		 
+		 return result;
+	}
+	
 	@Override
 	public void setValue(double value) throws IllegalArgumentException {
 		this.value = value;

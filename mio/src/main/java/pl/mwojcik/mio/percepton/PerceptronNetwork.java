@@ -15,6 +15,14 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 
 	private List<PerceptronLayer<V, P>> layers = new ArrayList<>();
 
+	private PerceptronNetwork() {
+		
+	}
+	
+	public int getLayersCount() {
+		return layers.size();
+	}
+	
 	public Collection<C> classify(InputVariableList<V> input) {
 		PerceptronNetworkVariables variables = calculateVariables(input);
 
@@ -41,6 +49,10 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 			for (int perceptronIndex = 0; perceptronIndex < layer.getPerceptrons().size(); ++perceptronIndex) {
 				P perceptron = layer.getPerceptrons().get(perceptronIndex);
 				Double result = perceptron.getResult(variables.getInputVariables(layerIndex));
+				
+//				if(layerIndex == layers.size() - 1) {
+//					result = perceptron.getActivationThreshold() <= result ? 1. : 0.;
+//				}
 				variables.setVariable(layerIndex + 1, perceptronIndex, new InputVariableImpl(result));
 			}
 		}
@@ -74,10 +86,21 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 		public InputVariableList<InputVariable> getInputVariables(int layer) {
 			return new InputVariableList<InputVariable>(variables.get(layer));
 		}
+		
+		public InputVariable getVariable(int outputLayer, int index) {
+			return variables.get(outputLayer).get(index);
+		}
 
 		public void setVariable(int outputLayer, int index, InputVariable variable) {
 			variables.get(outputLayer).set(index, variable);
 		}
+
+		@Override
+		public String toString() {
+			return "PerceptronNetworkVariables [variables=" + variables + "]";
+		}
+		
+		
 	}
 
 	public int getInputVariableCount() {
@@ -107,7 +130,7 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 		/**
 		 * Creates network with as many inside layers as arguments is passed.
 		 * 
-		 * @param layersPerceptronsCount
+		 * @param layersPerceptronsAmount
 		 *            Each argument equals amount of perceptrons in responding
 		 *            layer
 		 * @return
@@ -184,5 +207,5 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 	public List<PerceptronLayer<V, P>> getLayers() {
 		return Collections.unmodifiableList(layers);
 	}
-
+	
 }
