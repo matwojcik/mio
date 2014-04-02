@@ -23,7 +23,18 @@ public class BackPropagationTestUtil {
 	 */
 	public static <C extends PerceptronClass> void performTest(BackPropagationWeightLearner<C> learner,
 			Map<InputVariableList<InputVariable>, Collection<C>> trainingData) {
-		learner.learn(trainingData, 1000000, 0.05);
+				performTest(learner, trainingData, 0.05);
+			}
+
+	/**
+	 * Runs learning process, prints learned weights and checks if all training data is correct recognized
+	 * @param learner
+	 * @param trainingData
+	 * @param maxError TODO
+	 */
+	public static <C extends PerceptronClass> void performTest(BackPropagationWeightLearner<C> learner,
+			Map<InputVariableList<InputVariable>, Collection<C>> trainingData, double maxError) {
+		learner.learn(trainingData, 1000000, maxError);
 		System.out.println(learner.getWeights());
 		
 		for(InputVariableList<InputVariable> input: trainingData.keySet()) {

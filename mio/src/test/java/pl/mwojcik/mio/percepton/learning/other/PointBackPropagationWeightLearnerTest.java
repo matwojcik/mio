@@ -42,7 +42,7 @@ public class PointBackPropagationWeightLearnerTest{
 		builder.setVariablesCount(2);
 		
 		learner = new BackPropagationWeightLearner<>(builder.build());
-		TrainingDataFactory factory = new PointTrainingDataFactory();
+		TrainingDataFactory<Point> factory = new PointTrainingDataFactory();
 		
 		trainingData = factory.factory();
 	}

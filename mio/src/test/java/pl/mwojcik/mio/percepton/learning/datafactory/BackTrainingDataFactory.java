@@ -10,7 +10,7 @@ import pl.mwojcik.mio.percepton.variables.InputVariable;
 import pl.mwojcik.mio.percepton.variables.InputVariableImpl;
 import pl.mwojcik.mio.percepton.variables.InputVariableList;
 
-public class BackTrainingDataFactory implements TrainingDataFactory {
+public class BackTrainingDataFactory implements TrainingDataFactory<Point> {
 
 	/* (non-Javadoc)
 	 * @see pl.mwojcik.mio.percepton.learning.TrainingDataFactory#factory()
