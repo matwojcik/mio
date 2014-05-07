@@ -9,7 +9,7 @@ public class SigmoidalFunction implements Function {
 
 	@Override
 	public double getDefaultActivationThreshold() {
-		return 0.5;
+		return 0.7;
 	}
 
 	@Override

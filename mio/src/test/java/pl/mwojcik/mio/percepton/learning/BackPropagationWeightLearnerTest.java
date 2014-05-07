@@ -46,6 +46,11 @@ public class BackPropagationWeightLearnerTest {
 	}
 
 	@Test
+	public void testSetWeights() {
+		learner.setWeights(learner.getWeights());
+	}
+	
+	@Test
 	public void testLearn() {
 		learner.setLearningRate(0.1);
 		BackPropagationTestUtil.performTest(learner, trainingData, 0.05);

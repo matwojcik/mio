@@ -260,7 +260,7 @@ public class BackPropagationWeightLearner<C extends PerceptronClass> {
 	public List<List<List<Double>>> getWeights() {
 		List<List<List<Double>>> result = new ArrayList<>();
 
-		for (PerceptronLayer<InputVariable, WeightedSumPerceptron<InputVariable>> layer : layers) {
+		for (PerceptronLayer<InputVariable, WeightedSumPerceptron<InputVariable>> layer : network.getLayers()) {
 			List<List<Double>> perceptronWeights = new ArrayList<>();
 
 			for (WeightedSumPerceptron<InputVariable> perceptron : layer.getPerceptrons()) {
@@ -270,6 +270,15 @@ public class BackPropagationWeightLearner<C extends PerceptronClass> {
 		}
 
 		return result;
+	}
+
+	public void setWeights(List<List<List<Double>>> weights) {
+		for (int layerIndex = 0; layerIndex < weights.size(); layerIndex++) {
+			for (int perceptronIndex = 0; perceptronIndex < weights.get(layerIndex).size(); perceptronIndex++) {
+				network.getLayers().get(layerIndex).getPerceptrons().get(perceptronIndex)
+						.setWeights(weights.get(layerIndex).get(perceptronIndex));
+			}
+		}
 	}
 
 }

@@ -37,6 +37,11 @@ public class BackPropagationTestUtil {
 		learner.learn(trainingData, 1000000, maxError);
 		System.out.println(learner.getWeights());
 		
+		testLearnerOnData(learner, trainingData);
+	}
+
+	public static <C extends PerceptronClass> void testLearnerOnData(BackPropagationWeightLearner<C> learner,
+			Map<InputVariableList<InputVariable>, Collection<C>> trainingData) {
 		for(InputVariableList<InputVariable> input: trainingData.keySet()) {
 			Collection<C> result = learner.getNetwork().classify(input);
 			

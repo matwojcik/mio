@@ -113,7 +113,8 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 		private Collection<C> classes;
 		private PerceptronFactory<V, P> perceptronFactory;
 		private Integer variablesCount;
-
+		private Double defaultActivationThreshold;
+		
 		public Builder() {
 
 		}
@@ -148,6 +149,7 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 			this.classes = classes;
 			return this;
 		}
+		
 
 		public void setPerceptronFactory(PerceptronFactory<V, P> perceptronFactory) {
 			this.perceptronFactory = perceptronFactory;
@@ -162,6 +164,9 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 
 			int previousCount = 0;
 			if (layers != null) {
+				if(defaultActivationThreshold == null) {
+					defaultActivationThreshold = function.getDefaultActivationThreshold();
+				}
 				for (int layerPerceptronsAmount : layers) {
 					PerceptronLayer<V, P> layer = new PerceptronLayer<>();
 					int variables = previousCount == 0 ? variablesCount : previousCount;
@@ -169,7 +174,7 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 					for (int i = 0; i < layerPerceptronsAmount; ++i) {
 
 						layer.add(perceptronFactory.factory(variables, function,
-								function.getDefaultActivationThreshold()));
+								defaultActivationThreshold));
 
 					}
 
@@ -191,6 +196,10 @@ public class PerceptronNetwork<V extends InputVariable, P extends Perceptron<V>,
 			network.layers.add(builder.build());
 
 			return network;
+		}
+
+		public void setDefaultActivationThreshold(Double defaultActivationThreshold) {
+			this.defaultActivationThreshold = defaultActivationThreshold;
 		}
 
 	}

@@ -18,7 +18,7 @@ public class LettersTrainingDataFactory implements TrainingDataFactory<Letter> {
 
 	
 	
-	private static final String PATH = "./letters";
+	protected final String PATH = "./letters";
 
 	/* (non-Javadoc)
 	 * @see pl.mwojcik.mio.percepton.learning.TrainingDataFactory#factory()
